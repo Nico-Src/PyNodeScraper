@@ -1,5 +1,5 @@
 import dearpygui.dearpygui as dpg;
-from child import NodeChild, NodeChildType;
+from src.child import NodeChild, NodeChildType;
 
 class NodeAttribute():
     tag_counter = 0;
@@ -19,7 +19,14 @@ class NodeAttribute():
 
     # remove self
     def remove(self):
+        for child in self.children:
+            child.remove();
         dpg.delete_item(self.tag);
+    
+    def add_spacer(self, height):
+        data = {"height":height};
+        child = NodeChild(data, "", self.tag, NodeChildType.SPACE);
+        self.children.append(child);
 
     # add text child
     def add_text(self, text, label=""):
@@ -31,4 +38,10 @@ class NodeAttribute():
     def add_text_input(self, label="", width=200):
         data = {"width":width};
         child = NodeChild(data, label, self.tag, NodeChildType.TEXT_INPUT);
+        self.children.append(child);
+
+    # add image to attribute
+    def add_image(self, image, width=200, label=""):
+        data = {"image":image,"width":width};
+        child = NodeChild(data, label, self.tag, NodeChildType.IMAGE);
         self.children.append(child);

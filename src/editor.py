@@ -1,4 +1,7 @@
 import dearpygui.dearpygui as dpg;
+from src.node import ScrapeNode;
+import src.globals as globals;
+from src.attribute import NodeAttribute;
 
 class Editor():
     def __init__(self):
@@ -51,7 +54,25 @@ class Editor():
 
     # get node tag from attribute tag
     def getNodeTagFromAttribute(self, attrib_tag):
-        return attrib_tag.split(';')[0]
+        return attrib_tag.split(';')[0];
+
+    # run node graph (from scrapeNode onwards)
+    def run_graph(self):
+        # there can always only be one scrape node
+        scrapeNodes = [node for node in self.nodes.values() if isinstance(node, ScrapeNode)];
+        numScrapeNodes = len(scrapeNodes);
+        if numScrapeNodes == 0 or numScrapeNodes > 1: return None;
+        scrapeNode = scrapeNodes[0];
+        url = dpg.get_value(scrapeNode.attributes["url"].children[0].tag);
+        scraper = globals.getScraper();
+        scraper.scrapeUrl(url, self.scrapeCallback);
+        pass
+
+    # callback from scraper
+    def scrapeCallback(self, data):
+        scrapeNode = [node for node in self.nodes.values() if isinstance(node, ScrapeNode)][0];
+        scrapeNode.removeScreen();
+        scrapeNode.addScreen();
 
 class Hotkey():
     def __init__(self, key:int, callback):
