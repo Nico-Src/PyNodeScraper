@@ -4,18 +4,19 @@ from src.child import NodeChild, NodeChildType;
 class NodeAttribute():
     tag_counter = 0;
 
-    def __init__(self, label, parent, attrib_type):
+    def __init__(self, label, parent, attrib_type, shape = dpg.mvNode_PinShape_CircleFilled):
         self.label = label;
         self.data = {};
         self.parent = parent;
         self.children = [];
         self.attrib_type = attrib_type;
+        self.shape = shape;
         self.tag = f'{parent};node_attribute_{NodeAttribute.tag_counter}';
         NodeAttribute.tag_counter = NodeAttribute.tag_counter + 1;
 
     # add to ui context
     def use(self):
-        with dpg.node_attribute(label=self.label,parent=self.parent,tag=self.tag,attribute_type=self.attrib_type): pass;
+        with dpg.node_attribute(label=self.label,parent=self.parent,tag=self.tag,attribute_type=self.attrib_type,shape=self.shape): pass;
 
     # remove self
     def remove(self):
