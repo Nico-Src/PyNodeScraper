@@ -30,7 +30,7 @@ class Node():
                 for child in attrib.children:
                     child.use();
             with dpg.popup(self.tag,tag=self.popup_tag, mousebutton=dpg.mvMouseButton_Right, no_move=True):
-                dpg.add_button(tag=f"{self.popup_tag}_delete", label="Delete",width=self.width,callback=self.remove);
+                dpg.add_button(tag=f"{self.popup_tag}_delete", label="Delete",width=200,callback=self.remove);
 
     # add attribute to node
     def add_attribute(self,name,attribute):
@@ -39,7 +39,7 @@ class Node():
 
 class ScrapeNode(Node):
     def __init__(self, label, parent):
-        super().__init__(label, parent, 600);
+        super().__init__(label, parent, 400);
         self.screen_counter = 0;
         urlAttrib = NodeAttribute("URL",self.tag,dpg.mvNode_Attr_Static);
         self.add_attribute("url",urlAttrib);

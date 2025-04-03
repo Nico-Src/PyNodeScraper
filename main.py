@@ -14,8 +14,27 @@ resourceManager.loadImage('none', r'img/none.jpg');
 editorObj = Editor();
     
 dpg.create_context()
-dpg.create_viewport(width=width,height=height,x_pos=0,y_pos=0)
+dpg.create_viewport(width=width,height=height,x_pos=0,y_pos=0,title="PyNodeScraper")
+dpg.set_viewport_small_icon(f'img/small.ico');
+dpg.set_viewport_large_icon(f'img/large.ico');
 dpg.setup_dearpygui();
+
+accent = (75,168,50);
+accent_hover = (57,128,38);
+accent_active = (43,97,28);
+
+with dpg.theme() as global_theme:
+    with dpg.theme_component(dpg.mvAll):
+        dpg.add_theme_style(dpg.mvNodeStyleVar_NodeCornerRounding, 10, category=dpg.mvThemeCat_Nodes)
+        dpg.add_theme_color(dpg.mvNodeCol_GridLine, (50,50,50), category=dpg.mvThemeCat_Nodes)
+        dpg.add_theme_color(dpg.mvNodeCol_TitleBar, accent, category=dpg.mvThemeCat_Nodes)
+        dpg.add_theme_color(dpg.mvNodeCol_TitleBarHovered, accent_hover, category=dpg.mvThemeCat_Nodes)
+        dpg.add_theme_color(dpg.mvNodeCol_TitleBarSelected, accent_hover, category=dpg.mvThemeCat_Nodes)
+        dpg.add_theme_color(dpg.mvNodeCol_NodeBackground, (70,70,70), category=dpg.mvThemeCat_Nodes);
+        dpg.add_theme_color(dpg.mvNodeCol_NodeBackgroundHovered, (70,70,70), category=dpg.mvThemeCat_Nodes);
+        dpg.add_theme_color(dpg.mvNodeCol_NodeBackgroundSelected, (70,70,70), category=dpg.mvThemeCat_Nodes);
+
+dpg.bind_theme(global_theme)
 
 def link_callback(sender, app_data):
     # get aliases for the given linked attributes (tags)
