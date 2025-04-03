@@ -1,3 +1,3 @@
 # Node Based Web Scraper in Python (WIP)
 
-[![image.png](https://i.postimg.cc/HkJ3R2pR/image.png)](https://postimg.cc/WdvMJ0qw)
+[![image.png](https://i.postimg.cc/HW06nXVn/image.png)](https://postimg.cc/dD12S7Rc)
