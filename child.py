@@ -12,7 +12,9 @@ class NodeChild():
         self.tag = f'{parent};node_child_{NodeChild.tag_counter}';
         NodeChild.tag_counter = NodeChild.tag_counter + 1;
     
+    # add to ui context
     def use(self):
+        # based on child type add child (text, text_input, ...)
         match self.type:
             case NodeChildType.TEXT:
                 dpg.add_text(self.data['text'],label=self.label,tag=self.tag,parent=self.parent);

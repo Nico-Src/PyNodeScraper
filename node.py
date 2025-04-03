@@ -9,6 +9,7 @@ class Node():
         self.label = label;
         self.attributes = [];
         self.data = {};
+        self.links = {};
         self.parent = parent;
         self.width = width;
         self.tag = f'node_{Node.tag_counter}';
@@ -16,10 +17,12 @@ class Node():
         Node.tag_counter = Node.tag_counter + 1;
         pass
 
+    # remove node (and hide popup)
     def remove(self):
         dpg.delete_item(self.tag);
         dpg.configure_item(self.popup_tag, show=False);
     
+    # add node to ui context
     def use(self):
         with dpg.node(label=self.label,parent=self.parent,tag=self.tag):
             for attrib in self.attributes:
@@ -29,9 +32,9 @@ class Node():
             with dpg.popup(self.tag,tag=self.popup_tag, mousebutton=dpg.mvMouseButton_Right, no_move=True):
                 dpg.add_button(tag=f"{self.popup_tag}_delete", label="Delete",width=self.width,callback=self.remove);
 
+    # add attribute to node
     def add_attribute(self,attribute):
         self.attributes.append(attribute);
-        Editor.debug_log(f'Added new Attribute: {attribute.tag} (Parent: {self.tag})')
 
 
 class ScrapeNode(Node):
