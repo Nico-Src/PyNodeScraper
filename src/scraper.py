@@ -4,7 +4,7 @@ class Scraper():
     def __init__(self): pass
 
     # scrape url
-    def scrapeUrl(self, url, callback):
+    def scrape_url(self, url, callback):
         with sync_playwright() as p:
             browser = p.chromium.launch(headless=True)
             page = browser.new_page()

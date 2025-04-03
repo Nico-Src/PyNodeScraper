@@ -15,7 +15,7 @@ class NodeChild():
     
     # add to ui context
     def use(self):
-        resourceManager = globals.getResourceManager();
+        resource_manager = globals.get_resource_manager();
         # based on child type add child (text, text_input, ...)
         match self.type:
             case NodeChildType.SPACE:
@@ -26,11 +26,11 @@ class NodeChild():
                 dpg.add_input_text(label=self.label,tag=self.tag,parent=self.parent,width=self.data['width']);
             case NodeChildType.IMAGE:
                 image_tag = self.data['image'];
-                image = resourceManager.getImage(image_tag);
+                image = resource_manager.get_image(image_tag);
                 with dpg.texture_registry() as reg_id:
                     tex_id = dpg.add_static_texture(width=image.width,height=image.height,default_value=image.data,tag=f"{image_tag}_tex",parent=reg_id);
-                    resourceManager.addTexture(image_tag, tex_id);
-                scaled = image.scaleForWidth(self.data['width']);
+                    resource_manager.add_texture(image_tag, tex_id);
+                scaled = image.scale_for_width(self.data['width']);
                 dpg.add_image(tex_id,parent=self.parent,width=scaled['width'],height=scaled['height'],tag=f'{image_tag}_img');
 
     # remove child

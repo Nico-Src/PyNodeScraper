@@ -1,12 +1,12 @@
 from src.resource_manager import ResourceManager;
 from src.scraper import Scraper;
 
-global resourceManager, scraper;
-resourceManager = ResourceManager();
+global resource_manager, scraper;
+resource_manager = ResourceManager();
 scraper = Scraper();
 
-def getResourceManager():
-    return resourceManager;
+def get_resource_manager():
+    return resource_manager;
 
-def getScraper():
+def get_scraper():
     return scraper;

@@ -41,38 +41,37 @@ class Editor():
         self.links[link_tag] = {"from":attrib_one,"to":attrib_two}
         
         # add link to node
-        nodeRefOne = self.nodes[self.getNodeTagFromAttribute(attrib_one)];
-        nodeRefOne.links[attrib_one] = attrib_two;
+        node_ref_one = self.nodes[self.get_node_tag_from_attribute(attrib_one)];
+        node_ref_one.links[attrib_one] = attrib_two;
 
     # remove link from link dictionary
     def remove_link(self, link_tag):
         link = self.links[link_tag];
-        nodeRef = self.nodes[self.getNodeTagFromAttribute(link['from'])];
-        del nodeRef.links[link['from']];
-        print(len(nodeRef.links));
+        node_ref = self.nodes[self.get_node_tag_from_attribute(link['from'])];
+        del node_ref.links[link['from']];
         del self.links[link_tag];
 
     # get node tag from attribute tag
-    def getNodeTagFromAttribute(self, attrib_tag):
+    def get_node_tag_from_attribute(self, attrib_tag):
         return attrib_tag.split(';')[0];
 
     # run node graph (from scrapeNode onwards)
     def run_graph(self):
         # there can always only be one scrape node
-        scrapeNodes = [node for node in self.nodes.values() if isinstance(node, ScrapeNode)];
-        numScrapeNodes = len(scrapeNodes);
-        if numScrapeNodes == 0 or numScrapeNodes > 1: return None;
-        scrapeNode = scrapeNodes[0];
-        url = dpg.get_value(scrapeNode.attributes["url"].children[0].tag);
-        scraper = globals.getScraper();
-        scraper.scrapeUrl(url, self.scrapeCallback);
+        scrape_nodes = [node for node in self.nodes.values() if isinstance(node, ScrapeNode)];
+        num_scrape_nodes = len(scrape_nodes);
+        if num_scrape_nodes == 0 or num_scrape_nodes > 1: return None;
+        scrape_node = scrape_nodes[0];
+        url = dpg.get_value(scrape_node.attributes["url"].children[0].tag);
+        scraper = globals.get_scraper();
+        scraper.scrape_url(url, self.scrape_callback);
         pass
 
     # callback from scraper
-    def scrapeCallback(self, data):
-        scrapeNode = [node for node in self.nodes.values() if isinstance(node, ScrapeNode)][0];
-        scrapeNode.removeScreen();
-        scrapeNode.addScreen();
+    def scrape_callback(self, data):
+        scrape_node = [node for node in self.nodes.values() if isinstance(node, ScrapeNode)][0];
+        scrape_node.removeScreen();
+        scrape_node.addScreen();
 
 class Hotkey():
     def __init__(self, key:int, callback):

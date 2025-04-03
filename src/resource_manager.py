@@ -6,17 +6,17 @@ class ResourceManager():
         self.textures = {};
 
     # load image and add to dictionary
-    def loadImage(self, name, path):
+    def load_image(self, name, path):
         image = dpg.load_image(path);
         if image is not None:
             self.images[name] = ResourceImage(image[0], image[1], image[2], image[3]);
     
     # add texture to dictionary
-    def addTexture(self, image, texture):
+    def add_texture(self, image, texture):
         self.textures[image] = texture;
 
     # get image from dictionary
-    def getImage(self, name):
+    def get_image(self, name):
         if name in self.images:
             return self.images[name];
         else:
@@ -30,11 +30,11 @@ class ResourceImage():
         self.data = data;
 
     # return scaled dimensions for self with given width
-    def scaleForWidth(self, width):
+    def scale_for_width(self, width):
         ratio = self.width / self.height;
         return {"width":width, "height":width / ratio};
 
-    # return scaled dimensions for self with given height
-    def scaleForHeight(self,height):
+    # return scaled dimensions for self with given heights
+    def scale_for_height(self,height):
         ratio = self.width / self.height;
         return {"width":height*ratio,"height":height};

@@ -41,16 +41,16 @@ class ScrapeNode(Node):
     def __init__(self, label, parent):
         super().__init__(label, parent, 400);
         self.screen_counter = 0;
-        urlAttrib = NodeAttribute("URL",self.tag,dpg.mvNode_Attr_Static);
-        self.add_attribute("url",urlAttrib);
-        urlAttrib.add_text_input("URL", self.width);
-        dataAttrib = NodeAttribute("HTML",self.tag,dpg.mvNode_Attr_Output);
-        self.add_attribute("html",dataAttrib);
-        dataAttrib.add_text("HTML Data");
-        imageAttrib = NodeAttribute("Image",self.tag,dpg.mvNode_Attr_Static);
-        self.add_attribute("screen",imageAttrib);
-        imageAttrib.add_spacer(20);
-        imageAttrib.add_image("none",self.width);
+        url_attrib = NodeAttribute("URL",self.tag,dpg.mvNode_Attr_Static);
+        self.add_attribute("url",url_attrib);
+        url_attrib.add_text_input("URL", self.width);
+        data_attrib = NodeAttribute("HTML",self.tag,dpg.mvNode_Attr_Output);
+        self.add_attribute("html",data_attrib);
+        data_attrib.add_text("HTML Data");
+        image_attrib = NodeAttribute("Image",self.tag,dpg.mvNode_Attr_Static);
+        self.add_attribute("screen",image_attrib);
+        image_attrib.add_spacer(20);
+        image_attrib.add_image("none",self.width);
 
     # remove screen image
     def removeScreen(self):
@@ -58,20 +58,20 @@ class ScrapeNode(Node):
 
     # add screen image back in
     def addScreen(self):
-        resourceManager = globals.getResourceManager();
-        resourceManager.loadImage(f"screen_{self.screen_counter}", f'img/screen.jpg');
-        imageAttrib = NodeAttribute("Image",self.tag,dpg.mvNode_Attr_Static);
-        self.add_attribute("screen",imageAttrib);
-        imageAttrib.add_spacer(20);
-        imageAttrib.add_image(f"screen_{self.screen_counter}",self.width);
-        imageAttrib.use();
-        for child in imageAttrib.children:
+        resource_manager = globals.get_resource_manager();
+        resource_manager.load_image(f"screen_{self.screen_counter}", f'img/screen.jpg');
+        image_attrib = NodeAttribute("Image",self.tag,dpg.mvNode_Attr_Static);
+        self.add_attribute("screen",image_attrib);
+        image_attrib.add_spacer(20);
+        image_attrib.add_image(f"screen_{self.screen_counter}",self.width);
+        image_attrib.use();
+        for child in image_attrib.children:
             child.use();
         self.screen_counter = self.screen_counter + 1;
 
 class ExtractNode(Node):
     def __init__(self, label, parent):
         super().__init__(label, parent);
-        dataAttrib = NodeAttribute("Data",self.tag,dpg.mvNode_Attr_Input);
-        self.add_attribute("data",dataAttrib);
-        dataAttrib.add_text("Data");
+        data_attrib = NodeAttribute("Data",self.tag,dpg.mvNode_Attr_Input);
+        self.add_attribute("data",data_attrib);
+        data_attrib.add_text("Data");
